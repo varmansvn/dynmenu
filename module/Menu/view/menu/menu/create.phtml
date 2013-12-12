@@ -1,0 +1,19 @@
+<?php
+
+ $title = 'Add new menu';
+ $this->headTitle($title);
+ ?>
+
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+ <?php
+ $form->setAttribute('action', $this->url('menu', array('action' => 'create')));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('menu_id'));
+ echo $this->formRow($form->get('menu_name')); 
+ echo $this->formRow($form->get('url')); 
+ 
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();

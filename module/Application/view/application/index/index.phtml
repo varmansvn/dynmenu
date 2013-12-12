@@ -1,0 +1,63 @@
+
+<div class="container">
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Dynamic menu</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" id="menu-bar">
+                <!--
+                <li class="active"><a href="#">menu1</a></li>
+                <li><a href="#">menu2</a></li>
+                <li><a href="#">menu3</a></li>            
+                -->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Menu Management</h1>
+        <p>Create, Read, Update, and Delete your menu from the below link.</p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="/menu" role="button">Go Menu Management »</a>
+        </p>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "/menu/tojson",
+            headers: {
+                "Accept": "application/json"
+            },
+            type: "get",
+            success: function(data) {
+                var menus = data.menus;
+                var menubar = $("#menu-bar");
+                for (var idi in menus) {
+                    var li = "<li><a href='" + menus[idi].url + "'>" + menus[idi].menu_name + "</a></li>"
+                    menubar.append(li);
+                }
+            },
+            error: function(xhr, status, thrown) {
+                console.log(xhr);
+            }
+
+        });
+
+
+    });
+
+</script>
